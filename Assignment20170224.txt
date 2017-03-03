@@ -1,0 +1,215 @@
+package com.util.java; 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import junit.framework.Assert;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+ 
+public class ClickButton {
+ 
+ public static void main(String[] args) throws InterruptedException, AWTException {
+ 
+ //set path of Gecko driver in System.setproperty//
+// Note: webdriver.gecko.driver is not working. To overcome this issue use webdriver.firefox.marionette
+
+	 System.setProperty("webdriver.firefox.marionette","D:\\Setup\\geckodriver.exe");
+             
+        WebDriver driver = new FirefoxDriver();
+ 
+        driver.get("http://www.seleniumeasy.com/test/");
+        driver.manage().window().maximize();
+            
+		driver.findElement(By.id("btn_basic_example")).click();
+		
+		Thread.sleep(2000);
+
+		driver.findElement(By.cssSelector("a[class='list-group-item'][href*='basic-first-form-demo.html']")).click();
+        //driver.findElement(By.xpath("//a[@class='list-group-item'][text()='Simple Form Demo']")).click();
+		
+        driver.findElement(By.xpath("//*[@placeholder='Please enter your Message']")).sendKeys("Shubham");
+        //driver.findElement(By.xpath("//input[@id='user-message']")).sendKeys("Shubham");
+        //driver.findElement(By.cssSelector("input[id='user-message']")).sendKeys("Shubham");
+            
+        Thread.sleep(2000);
+	
+        driver.findElement(By.xpath("//button[text()='Show Message']")).click();
+        //driver.findElement(By.cssSelector("button[class='btn btn-default'][onclick='showInput();']")).click();
+        
+       String showMessage= driver.findElement(By.id("display")).getText();
+       //System.out.println(showMessage);
+       Assert.assertEquals("Shubham", showMessage);
+      
+        driver.findElement(By.id("sum1")).sendKeys("5");
+        //Thread.sleep(2000);
+            
+        driver.findElement(By.id("sum2")).sendKeys("3");
+        //Thread.sleep(2000);
+                        
+        driver.findElement(By.xpath("//button[text()='Get Total']")).click();
+        //driver.findElement(By.cssSelector("button[class='btn btn-default'][onclick='return total()']")).click();
+        
+        String getTotal= driver.findElement(By.id("displayvalue")).getText();
+        //System.out.println(getTotal);
+        Assert.assertEquals("8", getTotal);
+        
+        Thread.sleep(2000);
+        
+        driver.findElement(By.xpath("//a[@class='dropdown-toggle'][contains(text(),'Input Forms')]")).click();
+                     
+        driver.findElement(By.cssSelector("a[href*='basic-checkbox-demo.html']")).click();
+        
+        driver.findElement(By.id("isAgeSelected")).click();
+        
+        Boolean checkBoxChecked=driver.findElement(By.id("isAgeSelected")).isSelected();
+        Assert.assertTrue(checkBoxChecked);
+        
+        driver.findElement(By.xpath("//label[text()='Option 1']")).click();
+        //Thread.sleep(2000);
+        Boolean option1Checked=driver.findElement(By.id("isAgeSelected")).isSelected();
+        Assert.assertTrue(option1Checked);
+        driver.findElement(By.xpath("//label[text()='Option 1']")).click();
+        
+        driver.findElement(By.xpath("//label[text()='Option 2']")).click();
+        //Thread.sleep(2000);
+        Boolean option2Checked=driver.findElement(By.id("isAgeSelected")).isSelected();
+        Assert.assertTrue(option2Checked);
+        driver.findElement(By.xpath("//label[text()='Option 2']")).click();
+        
+        driver.findElement(By.xpath("//label[text()='Option 3']")).click();
+        //Thread.sleep(2000);
+        Boolean option3Checked=driver.findElement(By.id("isAgeSelected")).isSelected();
+        Assert.assertTrue(option3Checked);
+        driver.findElement(By.xpath("//label[text()='Option 3']")).click();
+        
+        
+        driver.findElement(By.xpath("//label[text()='Option 4']")).click();
+        //Thread.sleep(2000);
+        Boolean option4Checked=driver.findElement(By.id("isAgeSelected")).isSelected();
+        Assert.assertTrue(option4Checked);
+        driver.findElement(By.xpath("//label[text()='Option 4']")).click();
+        
+        
+        driver.findElement(By.id("check1")).click();  
+        
+        driver.findElement(By.xpath("//a[@class='dropdown-toggle'][contains(text(),'Input Forms')]")).click();
+                
+        driver.findElement(By.cssSelector("a[href*='basic-radiobutton-demo.html']")).click();
+        
+        driver.findElement(By.cssSelector("input[name='optradio'][value='Male']")).click();
+        driver.findElement(By.id("buttoncheck")).click();
+        //Boolean Select=driver.findElement(By.cssSelector("input[name='optradio'][value='Male']")).isSelected();
+        String maleRadioButtonChecked=driver.findElement(By.cssSelector("p[class='radiobutton']")).getText();
+        //System.out.println(maleRadioButtonChecked);
+       Assert.assertEquals("Radio button 'Male' is checked", maleRadioButtonChecked);
+ 
+        driver.findElement(By.cssSelector("input[name='optradio'][value='Female']")).click();
+        driver.findElement(By.id("buttoncheck")).click();
+        String femaleRadioButtonChecked=driver.findElement(By.cssSelector("p[class='radiobutton']")).getText();
+        //System.out.println(femaleRadioButtonChecked);
+        Assert.assertEquals("Radio button 'Female' is checked", femaleRadioButtonChecked);
+        
+        driver.findElement(By.cssSelector("input[name='gender'][value='Male']")).click();
+        driver.findElement(By.cssSelector("input[value='0 - 5']")).click();
+        driver.findElement(By.xpath("//button[text()='Get values']")).click();
+        
+        driver.findElement(By.cssSelector("input[name='gender'][value='Male']")).click();
+        driver.findElement(By.cssSelector("input[value='5 - 15']")).click();
+        driver.findElement(By.xpath("//button[text()='Get values']")).click();
+        
+        driver.findElement(By.cssSelector("input[name='gender'][value='Male']")).click();
+        driver.findElement(By.cssSelector("input[value='15 - 50']")).click();
+        driver.findElement(By.xpath("//button[text()='Get values']")).click();
+        
+        driver.findElement(By.cssSelector("input[name='gender'][value='Female']")).click();
+        driver.findElement(By.cssSelector("input[value='0 - 5']")).click();
+        driver.findElement(By.xpath("//button[text()='Get values']")).click();
+ 
+        driver.findElement(By.cssSelector("input[name='gender'][value='Female']")).click();
+        driver.findElement(By.cssSelector("input[value='5 - 15']")).click();
+        driver.findElement(By.xpath("//button[text()='Get values']")).click();
+        
+        driver.findElement(By.cssSelector("input[name='gender'][value='Female']")).click();
+        driver.findElement(By.cssSelector("input[value='15 - 50']")).click();
+        driver.findElement(By.xpath("//button[text()='Get values']")).click();
+        
+        driver.findElement(By.xpath("//a[@class='dropdown-toggle'][contains(text(),'Input Forms')]")).click();
+        
+        driver.findElement(By.cssSelector("a[href*='basic-select-dropdown-demo.html']")).click();
+        
+        WebElement day=driver.findElement(By.id("select-demo"));
+        Select selectDay= new Select(day);
+        
+        selectDay.selectByValue("Thursday");
+        
+        String daySelected=driver.findElement(By.cssSelector("p[class='selected-value']")).getText();
+        Assert.assertEquals("Day selected :- Thursday", daySelected);
+        
+        WebElement countryList=driver.findElement(By.id("multi-select"));
+        
+        //Create Robot class to perform keyboard functions
+        Robot countryListDropDown= new Robot();
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='California']")).click();
+        
+        driver.findElement(By.cssSelector("option[value='Florida']")).click();
+        
+        driver.findElement(By.cssSelector("option[value='New Jersey']")).click();
+        
+        driver.findElement(By.cssSelector("option[value='New York']")).click();
+        
+        driver.findElement(By.cssSelector("option[value='Ohio']")).click();
+        
+        driver.findElement(By.cssSelector("option[value='Texas']")).click();
+        
+        driver.findElement(By.cssSelector("option[value='Pennsylvania']")).click();
+        
+        driver.findElement(By.cssSelector("option[value='Washington']")).click();
+        
+        /*countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='California']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='Florida']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='New Jersey']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='New York']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='Ohio']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='Texas']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='Pennsylvania']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);
+        
+        countryListDropDown.keyPress(KeyEvent.VK_CONTROL); 
+        driver.findElement(By.cssSelector("option[value='Washington']")).click();
+        countryListDropDown.keyRelease(KeyEvent.VK_CONTROL);*/
+        
+        driver.findElement(By.id("printAll")).click();
+        
+        String selectedOptions=driver.findElement(By.cssSelector("p[class='getall-selected']")).getText();
+        System.out.println(selectedOptions);
+       // Assert.assertEquals("Options selected are : California,Florida,New Jersey,New York,Ohio,Texas,Pennsylvania,Washington", optionsSelected);
+        
+        
+  }
+ 
+ }  
